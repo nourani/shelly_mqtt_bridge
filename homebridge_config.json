@@ -1,0 +1,36 @@
+{
+    "bridge": {
+        "name": "<bridge_name>",
+        "username": "<username>",
+        "port": 51471,
+        "pin": "<pin>",
+        "advertiser": "bonjour-hap"
+    },
+    "accessories": [
+        {
+            "accessory": "mqttthing",
+            "type": "lightbulb",
+            "name": "<accessory_name>",
+            "url": "mqtt://<IP>",
+            "topics": {
+                "setBrightness": {
+                    "topic": "shellydimmerg3-<id>/rpc"
+                },
+                "setOn": {
+                    "topic": "shellydimmerg3-<id>/rpc"
+                }
+            },
+            "integerValue": true,
+            "logMqtt": true
+        }
+    ],
+    "platforms": [
+        {
+            "name": "Config",
+            "port": 8581,
+            "disableServerMetricsMonitoring": true,
+            "auth": "none",
+            "platform": "config"
+        }
+    ]
+}
