@@ -1,14 +1,18 @@
 const mqtt = require('mqtt');
-const client = mqtt.connect('mqtt://<server-ip>'); // Replace with your MQTT broker IP
 
-// Add your Shelly Gen 3 dimmers here
-const dimmers = [
-    {
-        sourceTopic: 'shellydimmerg3-<id>/rpc',
-        targetTopic: 'shellydimmerg3-<id>/rpc',
-        lastBrightness: 100
-    }
-];
+// Read from config file JSON config file:
+const config = require('./shelly_rpc_bridge_config.json');
+const client = mqtt.connect(`mqtt://${config.mqttBrokerIp}`);
+// Print MQTT broker IP
+console.log(`Connecting to MQTT broker at ${config.mqttBrokerIp}...`);
+
+// Read dimmers array from config file:
+const dimmers = config.dimmers.map(dimmers => ({
+    sourceTopic: dimmers.sourceTopic,
+    targetTopic: dimmers.targetTopic,
+    lastBrightness: dimmers.lastBrightness || 100
+}));
+
 
 client.on('connect', () => {
     dimmers.forEach(dimmer => client.subscribe(dimmer.sourceTopic));

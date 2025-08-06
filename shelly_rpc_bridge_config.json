@@ -1,0 +1,13 @@
+{
+    "mqttBrokerIp": "<your mqtt broker ip>",
+    "dimmers": [
+        {
+            "sourceTopic": "<mqtt topic from Homebridge>/rpc",
+            "targetTopic": "<mqtt topic to device>/rpc"
+        },
+        {
+            "sourceTopic": "<mqtt topic from Homebridge>/rpc",
+            "targetTopic": "<mqtt topic to device>/rpc"
+        }
+    ]
+}
